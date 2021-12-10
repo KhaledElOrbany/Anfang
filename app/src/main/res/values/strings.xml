@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Anfang</string>
+    <string name="hello">Hello</string>
+    <string name="txtRefresh">Refresh</string>
+    <string name="txtImsak">Imsak</string>
+    <string name="txtSunrise">Sunrise</string>
+    <string name="txtDhuhr">Dhuhr</string>
+    <string name="txtAsr">Asr</string>
+    <string name="txtMaghrib">Maghrib</string>
+    <string name="txtIsha">Isha</string>
+    <string name="txtImsakTime">00:00</string>
+    <string name="txtSunriseTime">00:00</string>
+    <string name="txtDhuhrTime">00:00</string>
+    <string name="txtAsrTime">00:00</string>
+    <string name="txtMaghribTime">00:00</string>
+    <string name="txtIshaTime">00:00</string>
+    <string name="txtPrayersTimeLine">Prayers Time line</string>
+    <string name="txtLastUpdateTime">Last Update Time:</string>
+</resources>

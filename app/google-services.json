@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667761817858",
+    "firebase_url": "https://fir-demo-7221e.firebaseio.com",
+    "project_id": "fir-demo-7221e",
+    "storage_bucket": "fir-demo-7221e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667761817858:android:1b73b697b5d1d2169b2a1b",
+        "android_client_info": {
+          "package_name": "com.el3orb.anfang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667761817858-p3bk49q4vn4v7bj3nerk28m00u9s3080.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj5yyBU_Q7R9vhXEOcUmu5wWtrtfIE_sg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667761817858-p3bk49q4vn4v7bj3nerk28m00u9s3080.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
