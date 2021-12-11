@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/itmPrayers"
+        android:icon="@drawable/ic_baseline_nights_stay_24"
+        android:title="@string/txtPrayers" />
+    <item
+        android:id="@+id/itmAbout"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/txtHelp" />
+</menu>
