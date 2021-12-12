@@ -15,7 +15,9 @@
     <string name="txtMaghribTime">00:00</string>
     <string name="txtIshaTime">00:00</string>
     <string name="txtPrayersTimeLine">Prayers Time line</string>
+    <string name="txtDate">Date: </string>
     <string name="txtLastUpdateTime">Last Update Time:</string>
-    <string name="txtHelp">Help</string>
+    <string name="txtAbout">About</string>
     <string name="txtPrayers">Prayers</string>
+    <string name="txtWifiSettings">Wifi Settings</string>
 </resources>

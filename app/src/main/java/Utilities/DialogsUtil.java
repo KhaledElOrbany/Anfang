@@ -22,7 +22,7 @@ public class DialogsUtil extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder alert = new AlertDialog.Builder(requireActivity());
         alert.setTitle(this.title)
                 .setMessage(this.message)
                 .setPositiveButton(this.btnText, (dialog, which) -> {

@@ -27,14 +27,24 @@
             app:layout_constraintVertical_bias="0.034" />
 
         <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/txtDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPrayersTimeLine" />
+
+        <TextView
             android:id="@+id/txtImsak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:text="@string/txtImsak"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPrayersTimeLine" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
         <TextView
             android:id="@+id/txtDhuhr"
@@ -101,12 +111,12 @@
             android:id="@+id/txtImsakTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:text="@string/txtImsakTime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.453"
             app:layout_constraintStart_toEndOf="@+id/txtImsak"
-            app:layout_constraintTop_toBottomOf="@+id/txtPrayersTimeLine" />
+            app:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
         <TextView
             android:id="@+id/txtDhuhrTime"
@@ -178,4 +188,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLastUpdateTime" />
+
+    <ProgressBar
+        android:id="@+id/loadingPanel"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

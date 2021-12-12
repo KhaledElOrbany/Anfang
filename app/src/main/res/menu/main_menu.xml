@@ -5,7 +5,11 @@
         android:icon="@drawable/ic_baseline_nights_stay_24"
         android:title="@string/txtPrayers" />
     <item
+        android:id="@+id/itmWifi"
+        android:icon="@drawable/ic_baseline_wifi_24"
+        android:title="@string/txtWifiSettings" />
+    <item
         android:id="@+id/itmAbout"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="@string/txtHelp" />
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/txtAbout" />
 </menu>
