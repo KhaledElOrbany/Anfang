@@ -11,7 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import Globals.PrayersCallbacks;
 
-public class PrayersUtil extends AppCompatActivity {
+public class PrayersUtil {
     FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
     DatabaseReference prayerRef = rootRef.getReference();
     private final DatabaseReference prayersDate = prayerRef.child("/hm01/prayers/date");

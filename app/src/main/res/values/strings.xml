@@ -20,4 +20,7 @@
     <string name="txtAbout">About</string>
     <string name="txtPrayers">Prayers</string>
     <string name="txtWifiSettings">Wifi Settings</string>
+    <string name="txtPlugName">Plug</string>
+    <string name="btnPlugDetails">See Plug\'s Details</string>
+    <string name="switchPlugState">State: </string>
 </resources>
