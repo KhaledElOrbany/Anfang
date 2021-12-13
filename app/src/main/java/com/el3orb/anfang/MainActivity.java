@@ -19,7 +19,6 @@ import Utilities.DialogsUtil;
 import Utilities.PlugsUtil;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         loadData();
     }
 
-    private void loadData() {
+    public void loadData() {
         PlugsUtil plugObj = new PlugsUtil();
         plugObj.getPlugs(plugs -> {
             for (DataSnapshot plug : plugs) {
