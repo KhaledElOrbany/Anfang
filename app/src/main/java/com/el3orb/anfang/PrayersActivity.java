@@ -37,8 +37,7 @@ public class PrayersActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private View.OnClickListener refresh() {
         spinner.setVisibility(View.VISIBLE);
-        PrayersUtil prayersObj = new PrayersUtil();
-        prayersObj.getPrayersDetails(new PrayersCallbacks() {
+        new PrayersUtil().getPrayersDetails(new PrayersCallbacks() {
             @Override
             public void setPrayersDate(DataSnapshot child) {
                 TextView prayersDate = findViewById(R.id.txtDate);

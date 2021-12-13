@@ -1,6 +1,7 @@
 package com.el3orb.anfang;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,29 +16,31 @@ import com.google.firebase.database.DataSnapshot;
 
 import java.util.Objects;
 
+import Globals.Globals;
 import Utilities.DialogsUtil;
 import Utilities.PlugsUtil;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadData();
     }
 
     public void loadData() {
-        PlugsUtil plugObj = new PlugsUtil();
-        plugObj.getPlugs(plugs -> {
+        ProgressDialog progress = Globals.ShowLoadingPanel(this);
+        new PlugsUtil().getPlugs(plugs -> {
             for (DataSnapshot plug : plugs) {
                 ((TextView) findViewById(R.id.plugName)).setText(plug.getKey());
                 for (DataSnapshot data : plug.getChildren()) {
                     if (Objects.equals(data.getKey(), "state")) {
                         ((Switch) findViewById(R.id.switchPlug))
-                                .setChecked(Boolean.parseBoolean(Objects.requireNonNull(data.getValue()).toString()));
+                                .setChecked(!Objects.requireNonNull(data.getValue()).toString().equals("0"));
                     }
                 }
             }
+            progress.dismiss();
         });
     }
 
