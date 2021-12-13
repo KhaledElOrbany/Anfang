@@ -14,6 +14,7 @@ public class PlugsUtil {
     FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
     DatabaseReference prayerRef = rootRef.getReference();
     private final DatabaseReference plugs = prayerRef.child("/hm01/plugs");
+    //TODO: Search about queries
 
     public void getPlugs(PlugsCallBacks callbacks) {
         plugs.addListenerForSingleValueEvent(new ValueEventListener() {
