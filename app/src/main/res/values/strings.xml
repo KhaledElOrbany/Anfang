@@ -24,4 +24,5 @@
     <string name="btnPlugDetails">See Plug\'s Details</string>
     <string name="switchPlugState">State: </string>
     <string name="logo">Logo</string>
+    <string name="txtDisplayAllPlugs">Display All Plugs</string>
 </resources>

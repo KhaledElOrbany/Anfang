@@ -10,8 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Anfang">
         <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:label="About"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AllPlugsActivity"
+            android:exported="false"
+            android:label="All Plugs"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".PrayersActivity"
             android:exported="false"
+            android:label="Prayers"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
