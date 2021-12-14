@@ -57,7 +57,8 @@ public class AllPlugsActivity extends AppCompatActivity {
         stateSwitch.setChecked(state);
 
         btnDetails.setOnClickListener(v -> {
-            Intent plugDetails = new Intent(AllPlugsActivity.this, null);
+            Intent plugDetails = new Intent(AllPlugsActivity.this, SinglePlugActivity.class);
+            plugDetails.putExtra("plugName", name);
             startActivity(plugDetails);
         });
 

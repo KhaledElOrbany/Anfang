@@ -25,4 +25,9 @@
     <string name="switchPlugState">State: </string>
     <string name="logo">Logo</string>
     <string name="txtDisplayAllPlugs">Display All Plugs</string>
+    <string name="about_us_description">Khaled</string>
+    <string name="twitterHandle">\@el3orb</string>
+    <string name="about_image_desc">About Image</string>
+    <string name="txtAboutVersion">V 1.0</string>
+    <string name="copyRight">Copy Right © el3orb</string>
 </resources>

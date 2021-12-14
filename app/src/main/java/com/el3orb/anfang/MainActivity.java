@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 DialogsUtil dialog = new DialogsUtil("Info",
                         "This option will be provided soon..", "Ok");
                 dialog.show(getSupportFragmentManager(), "Info");
+                return true;
             case R.id.itmAbout:
                 Intent aboutIntent = new Intent(this, AboutActivity.class);
                 startActivity(aboutIntent);

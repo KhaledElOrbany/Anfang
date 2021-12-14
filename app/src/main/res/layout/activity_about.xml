@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
 
+    <ImageView
+        android:id="@+id/aboutImg"
+        android:layout_width="161dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="64dp"
+        android:contentDescription="@string/about_image_desc"
+        app:layout_constraintBottom_toTopOf="@+id/aboutVersion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_baseline_info_24" />
+
+    <TextView
+        android:id="@+id/aboutVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/txtAboutVersion"
+        app:layout_constraintBottom_toTopOf="@+id/aboutCopyRight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/aboutCopyRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
+        android:text="@string/copyRight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
