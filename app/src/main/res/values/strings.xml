@@ -32,4 +32,5 @@
     <string name="copyRight">Copy Right © el3orb</string>
     <string name="txtAddNewPlug">Add New Plug</string>
     <string name="txtEditPlugName">Edit Plug Name</string>
+    <string name="plugsCard">plugsCard</string>
 </resources>
