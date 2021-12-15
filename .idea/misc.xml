@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.35625" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.2972222222222222" />
-        <entry key="app/src/main/res/layout/activity_all_plugs.xml" value="0.34010416666666665" />
+        <entry key="app/src/main/res/layout/activity_all_plugs.xml" value="0.2935185185185185" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_prayers.xml" value="0.33" />
@@ -17,10 +17,11 @@
         <entry key="app/src/main/res/layout/activity_splash_img.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/card.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout/dialog.xml" value="0.34010416666666665" />
-        <entry key="app/src/main/res/layout/plug_card.xml" value="0.255078125" />
+        <entry key="app/src/main/res/layout/plug_card.xml" value="0.5" />
         <entry key="app/src/main/res/layout/prayers_fragment.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/menu/Menu.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.34010416666666665" />
+        <entry key="app/src/main/res/menu/single_plug_menu.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.35625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.35625" />
       </map>

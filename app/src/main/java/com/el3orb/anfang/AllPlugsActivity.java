@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -49,19 +48,17 @@ public class AllPlugsActivity extends AppCompatActivity {
     private void addCard(String name, boolean state) {
         final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
 
-        TextView plugName = view.findViewById(R.id.plugName);
-        Button btnDetails = view.findViewById(R.id.btnOpenPlugDetail);
-        Switch stateSwitch = view.findViewById(R.id.switchPlug);
-
-        plugName.setText(name);
-        stateSwitch.setChecked(state);
-
-        btnDetails.setOnClickListener(v -> {
+        view.setOnClickListener(v -> {
             Intent plugDetails = new Intent(AllPlugsActivity.this, SinglePlugActivity.class);
             plugDetails.putExtra("plugName", name);
             startActivity(plugDetails);
         });
 
+        ((TextView) view.findViewById(R.id.plugName)).setText(name);
+        ((Switch) view.findViewById(R.id.switchPlug)).setChecked(state);
         layout.addView(view);
+    }
+
+    public void addNewPlug(View view) {
     }
 }
