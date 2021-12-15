@@ -10,7 +10,7 @@ public class Globals {
     public static ProgressDialog ShowLoadingPanel(Context context) {
         ProgressDialog progress = new ProgressDialog(context);
         progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        progress.setMessage("Please wait while loading...");
         progress.setCancelable(false);
         progress.show();
         return progress;

@@ -1,13 +1,18 @@
 package Utilities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 
 import Globals.PrayersCallbacks;
 
@@ -39,5 +44,19 @@ public class PrayersUtil {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void fetchData() {
+        String url = "https://www.sabah.com.tr/sakarya-namaz-vakitleri";
+
+        try {
+            // date = soup.find('div', {'class','date'})
+            // prayers = soup.find('div', {'class','vakitler boxShadowSet'}).findAll('li')
+            Document document = Jsoup.connect(url).get();
+            Elements prayers = document.getElementsByClass("vakitler boxShadowSet");
+            System.out.println(prayers);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
