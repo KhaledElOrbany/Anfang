@@ -33,28 +33,34 @@ public class AllPlugsActivity extends AppCompatActivity {
         ProgressDialog progress = Globals.ShowLoadingPanel(this);
         new PlugsUtil().getPlugs(plugs -> {
             for (DataSnapshot plug : plugs) {
-
+                boolean state = false;
+                String name = "";
                 for (DataSnapshot data : plug.getChildren()) {
                     if (Objects.equals(data.getKey(), "state")) {
-                        addCard(plug.getKey(), !Objects.requireNonNull(data.getValue()).toString().equals("0"));
+                        state = !Objects.requireNonNull(data.getValue()).toString().equals("0");
+                    }
+                    if (Objects.equals(data.getKey(), "name")) {
+                        name = data.getValue().toString();
                     }
                 }
+                addCard(plug.getKey(), name, state);
             }
             progress.dismiss();
         });
     }
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private void addCard(String name, boolean state) {
+    private void addCard(String id, String name, boolean state) {
         final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
 
         view.setOnClickListener(v -> {
             Intent plugDetails = new Intent(AllPlugsActivity.this, SinglePlugActivity.class);
+            plugDetails.putExtra("plugId", id);
             plugDetails.putExtra("plugName", name);
             startActivity(plugDetails);
         });
 
-        ((TextView) view.findViewById(R.id.plugName)).setText(name);
+        ((TextView) view.findViewById(R.id.plugId)).setText(name);
         ((Switch) view.findViewById(R.id.switchPlug)).setChecked(state);
         layout.addView(view);
     }

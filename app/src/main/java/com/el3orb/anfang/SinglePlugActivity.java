@@ -1,13 +1,16 @@
 package com.el3orb.anfang;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
@@ -15,8 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SinglePlugActivity extends AppCompatActivity {
     FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
-    DatabaseReference prayerRef = rootRef.getReference();
-    DatabaseReference plug;
+    DatabaseReference prayerRef = rootRef.getReference(), plug;
+    String plugId, plugName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,31 @@ public class SinglePlugActivity extends AppCompatActivity {
             Log.e(SinglePlugActivity.this.getLocalClassName(), "intent extras is null");
             return;
         }
-        String plugName = extras.getString("plugName");
+        this.plugId = extras.getString("plugId");
+        this.plugName = extras.getString("plugName");
         setTitle(plugName);
-        plug = prayerRef.child("/hm01/plugs" + plugName);
+        plug = prayerRef.child("/hm01/plugs/" + plugId + "/");
     }
 
-    public void editPlugName(View view) {
+    public void editPlugName() {
+        Dialog editNameDialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.plug_name_edit_dialog, null);
+
+        final EditText name = view.findViewById(R.id.nameEdit);
+        name.setText(getTitle());
+
+        builder.setView(view);
+        builder.setTitle("Edit name");
+        builder.setPositiveButton("Ok", (dialog, which) -> {
+            plug.child("name").setValue(name.getText().toString());
+            setTitle(name.getText().toString());
+        }).setNegativeButton("Cancel", (dialog, which) -> {
+
+        });
+        editNameDialog = builder.create();
+        editNameDialog.setCanceledOnTouchOutside(false);
+        editNameDialog.show();
     }
 
     //region Menu
@@ -46,12 +68,11 @@ public class SinglePlugActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.itemEditName:
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.itemEditName) {
+            editPlugName();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
     //endregion
 }
