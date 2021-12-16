@@ -1,6 +1,5 @@
 package com.el3orb.anfang;
 
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;

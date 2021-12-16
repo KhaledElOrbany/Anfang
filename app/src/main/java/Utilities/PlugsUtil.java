@@ -11,6 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import Globals.PlugsCallBacks;
 
 public class PlugsUtil {
+
     FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
     DatabaseReference prayerRef = rootRef.getReference();
     private final DatabaseReference plugs = prayerRef.child("/hm01/plugs");
@@ -27,5 +28,13 @@ public class PlugsUtil {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public void setPlugsState(String plugId, boolean state) {
+        if (state) {
+            plugs.child(plugId).child("state").setValue(1);
+        } else {
+            plugs.child(plugId).child("state").setValue(0);
+        }
     }
 }

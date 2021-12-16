@@ -40,7 +40,7 @@ public class AllPlugsActivity extends AppCompatActivity {
                         state = !Objects.requireNonNull(data.getValue()).toString().equals("0");
                     }
                     if (Objects.equals(data.getKey(), "name")) {
-                        name = data.getValue().toString();
+                        name = Objects.requireNonNull(data.getValue()).toString();
                     }
                 }
                 addCard(plug.getKey(), name, state);
@@ -60,8 +60,14 @@ public class AllPlugsActivity extends AppCompatActivity {
             startActivity(plugDetails);
         });
 
-        ((TextView) view.findViewById(R.id.plugId)).setText(name);
-        ((Switch) view.findViewById(R.id.switchPlug)).setChecked(state);
+        ((TextView) view.findViewById(R.id.plugName)).setText(name);
+
+        Switch stateSwitch = view.findViewById(R.id.switchPlug);
+        stateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            PlugsUtil plugsUtil = new PlugsUtil();
+            plugsUtil.setPlugsState(id, isChecked);
+        });
+        stateSwitch.setChecked(state);
         layout.addView(view);
     }
 

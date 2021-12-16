@@ -10,12 +10,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
 
 import java.util.Date;
-import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
-import Globals.PrayersCallbacks;
 import Utilities.PrayersUtil;
 
 public class PrayersActivity extends AppCompatActivity {
@@ -25,7 +23,7 @@ public class PrayersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prayers);
-        spinner = (ProgressBar) findViewById(R.id.loadingPanel);
+        spinner = findViewById(R.id.loadingPanel);
         refresh();
     }
 
@@ -37,45 +35,24 @@ public class PrayersActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private View.OnClickListener refresh() {
         spinner.setVisibility(View.VISIBLE);
-        new PrayersUtil().getPrayersDetails(new PrayersCallbacks() {
-            @Override
-            public void setPrayersDate(DataSnapshot child) {
-                TextView prayersDate = findViewById(R.id.txtDate);
-                prayersDate.setText("Date: ");
-                prayersDate.append(child.getValue(String.class));
-                setLastUpdateTime();
-            }
 
-            @Override
-            public void setPrayersTimes(Iterable<DataSnapshot> prayerTimes) {
-                for (DataSnapshot data : prayerTimes) {
-                    switch (Objects.requireNonNull(data.getKey())) {
-                        case "Imsak":
-                            ((TextView) findViewById(R.id.txtImsakTime)).setText(data.getValue(String.class));
-                            break;
-                        case "Sunrise":
-                            ((TextView) findViewById(R.id.txtSunriseTime)).setText(data.getValue(String.class));
-                            break;
-                        case "Dhuhr":
-                            ((TextView) findViewById(R.id.txtDhuhrTime)).setText(data.getValue(String.class));
-                            break;
-                        case "Asr":
-                            ((TextView) findViewById(R.id.txtAsrTime)).setText(data.getValue(String.class));
-                            break;
-                        case "Maghrib":
-                            ((TextView) findViewById(R.id.txtMaghribTime)).setText(data.getValue(String.class));
-                            break;
-                        case "Isha":
-                            ((TextView) findViewById(R.id.txtIshaTime)).setText(data.getValue(String.class));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                setLastUpdateTime();
-            }
-        });
+        String[] prayersTimes = {};
+        try {
+            prayersTimes = new PrayersUtil().execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        ((TextView) findViewById(R.id.txtImsakTime)).setText(prayersTimes[0].trim());
+        ((TextView) findViewById(R.id.txtSunriseTime)).setText(prayersTimes[1].trim());
+        ((TextView) findViewById(R.id.txtDhuhrTime)).setText(prayersTimes[2].trim());
+        ((TextView) findViewById(R.id.txtAsrTime)).setText(prayersTimes[3].trim());
+        ((TextView) findViewById(R.id.txtMaghribTime)).setText(prayersTimes[4].trim());
+        ((TextView) findViewById(R.id.txtIshaTime)).setText(prayersTimes[5].trim());
 
+        TextView prayersDate = findViewById(R.id.txtDate);
+        prayersDate.setText("Date: ");
+        prayersDate.append(new SimpleDateFormat("dd.MM.yyyy").format(new Date(System.currentTimeMillis())));
+        setLastUpdateTime();
         return null;
     }
 
