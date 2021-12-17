@@ -45,8 +45,19 @@
             android:layout_height="180dp"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="displayAllPharmacies"
             app:cardCornerRadius="12dp"
-            card_view:cardBackgroundColor="#72E4E4E4" />
+            card_view:cardBackgroundColor="#72E4E4E4" >
+
+            <ImageView
+                android:id="@+id/pharmaciesCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/pharmaciesCard"
+                app:srcCompat="@drawable/ic_pharmacy" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <LinearLayout

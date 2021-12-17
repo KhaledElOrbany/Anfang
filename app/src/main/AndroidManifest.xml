@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Anfang">
         <activity
+            android:name=".AllPharmaciesActivity"
+            android:exported="false" />
+        <activity
             android:name=".SinglePlugActivity"
             android:exported="false"
             android:label="Plug"
@@ -39,4 +42,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

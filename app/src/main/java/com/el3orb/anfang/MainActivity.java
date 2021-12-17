@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(allPlugs);
     }
 
+    public void displayAllPharmacies(View view) {
+        Intent allPlugs = new Intent(MainActivity.this, AllPlugsActivity.class);
+        startActivity(allPlugs);
+    }
+
     //region Menu
     @SuppressLint("RestrictedApi")
     @Override

@@ -51,6 +51,7 @@ public class AllPlugsActivity extends AppCompatActivity {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private void addCard(String id, String name, boolean state) {
+        @SuppressLint("InflateParams")
         final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
 
         view.setOnClickListener(v -> {
