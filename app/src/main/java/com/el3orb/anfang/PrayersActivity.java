@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +16,11 @@ import java.util.concurrent.ExecutionException;
 import Utilities.PrayersUtil;
 
 public class PrayersActivity extends AppCompatActivity {
-    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prayers);
-        spinner = findViewById(R.id.loadingPanel);
         refresh();
     }
 
@@ -32,13 +29,18 @@ public class PrayersActivity extends AppCompatActivity {
                 .setAction("refresh", refresh()).show();
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
     private View.OnClickListener refresh() {
-        spinner.setVisibility(View.VISIBLE);
+        setTimes();
+        setDate();
+        setLastUpdateTime();
+        return null;
+    }
 
+    private void setTimes() {
         String[] prayersTimes = {};
         try {
-            prayersTimes = new PrayersUtil().execute().get();
+            prayersTimes = new PrayersUtil(findViewById(R.id.loadingPanel)).execute().get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -48,12 +50,13 @@ public class PrayersActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.txtAsrTime)).setText(prayersTimes[3].trim());
         ((TextView) findViewById(R.id.txtMaghribTime)).setText(prayersTimes[4].trim());
         ((TextView) findViewById(R.id.txtIshaTime)).setText(prayersTimes[5].trim());
+    }
 
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
+    private void setDate() {
         TextView prayersDate = findViewById(R.id.txtDate);
         prayersDate.setText("Date: ");
         prayersDate.append(new SimpleDateFormat("dd.MM.yyyy").format(new Date(System.currentTimeMillis())));
-        setLastUpdateTime();
-        return null;
     }
 
     @SuppressLint("SetTextI18n")
@@ -64,6 +67,5 @@ public class PrayersActivity extends AppCompatActivity {
         TextView lastUpdateTime = findViewById(R.id.txtLastUpdateTime);
         lastUpdateTime.setText("Last Update Time: ");
         lastUpdateTime.append(formatter.format(date));
-        spinner.setVisibility(View.GONE);
     }
 }

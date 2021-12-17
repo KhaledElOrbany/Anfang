@@ -25,6 +25,7 @@ public class DialogsUtil extends AppCompatDialogFragment {
         AlertDialog.Builder alert = new AlertDialog.Builder(requireActivity());
         alert.setTitle(this.title)
                 .setMessage(this.message)
+                .setCancelable(false)
                 .setPositiveButton(this.btnText, (dialog, which) -> {
                 });
         return alert.create();
