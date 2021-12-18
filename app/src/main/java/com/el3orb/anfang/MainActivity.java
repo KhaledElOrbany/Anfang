@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayAllPharmacies(View view) {
-        Intent allPlugs = new Intent(MainActivity.this, AllPlugsActivity.class);
-        startActivity(allPlugs);
+        Intent allPharmacies = new Intent(MainActivity.this, AllPharmaciesActivity.class);
+        startActivity(allPharmacies);
     }
 
     //region Menu

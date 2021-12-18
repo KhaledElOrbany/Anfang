@@ -16,7 +16,7 @@
         tools:ignore="UselessParent">
 
         <LinearLayout
-            android:id="@+id/container"
+            android:id="@+id/allPlugsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

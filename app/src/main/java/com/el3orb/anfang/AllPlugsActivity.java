@@ -26,7 +26,7 @@ public class AllPlugsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_plugs);
         loadData();
-        layout = findViewById(R.id.container);
+        layout = findViewById(R.id.allPlugsContainer);
     }
 
     public void loadData() {

@@ -9,17 +9,19 @@
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.2972222222222222" />
         <entry key="app/src/main/res/layout/activity_all_pharmacies.xml" value="0.34010416666666665" />
-        <entry key="app/src/main/res/layout/activity_all_plugs.xml" value="0.2935185185185185" />
+        <entry key="app/src/main/res/layout/activity_all_plugs.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.34010416666666665" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_pharmacies.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_prayers.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_singl_plug.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_single_plug.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/layout/activity_splash_img.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/card.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout/demo.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/dialog.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/item_pharmacy.xml" value="0.34010416666666665" />
+        <entry key="app/src/main/res/layout/pharmacy_card.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/plug_card.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/plug_name_edit_dialog.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/prayers_fragment.xml" value="0.18697916666666667" />
