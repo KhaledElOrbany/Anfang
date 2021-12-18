@@ -8,8 +8,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/pharmacyCardView"
-        android:layout_width="379dp"
-        android:layout_height="87dp"
+        android:layout_width="380dp"
+        android:layout_height="85dp"
         android:layout_gravity="center"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"

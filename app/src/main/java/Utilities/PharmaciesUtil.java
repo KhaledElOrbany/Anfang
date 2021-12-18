@@ -1,8 +1,8 @@
 package Utilities;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,17 +12,23 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, String>> {
-    private final ProgressBar spinner;
+    private final Context context;
     HashMap<String, String> pharmacies;
+    private ProgressDialog pd;
 
-    public PharmaciesUtil(ProgressBar spinner) {
-        this.spinner = spinner;
+    public PharmaciesUtil(Context context) {
+        this.context = context;
         pharmacies = new HashMap<>();
     }
 
     @Override
     protected void onPreExecute() {
-        spinner.setVisibility(View.VISIBLE);
+        super.onPreExecute();
+        pd = new ProgressDialog(context);
+        pd.setMessage("Refreshing.. Please Wait!");
+        pd.setIndeterminate(false);
+        pd.setCancelable(false);
+        pd.show();
     }
 
     @Override
@@ -36,11 +42,11 @@ public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, Stri
                 String header = row.select("div.card-header").text();
                 String body = row.select("div.card-body").text();
                 try {
-                    phone = body.substring(body.lastIndexOf(": "), body.indexOf("Ara"));
+                    phone = body.substring(body.lastIndexOf(":") + 1, body.indexOf("Ara"));
                 } catch (Exception ex) {
                     phone = "";
                 }
-                pharmacies.put(header, phone);
+                pharmacies.put(header.trim(), phone.trim());
             }
             return pharmacies;
         } catch (IOException e) {
@@ -51,6 +57,6 @@ public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, Stri
 
     @Override
     protected void onPostExecute(HashMap<String, String> result) {
-        spinner.setVisibility(View.GONE);
+        pd.dismiss();
     }
 }

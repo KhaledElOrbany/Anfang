@@ -25,20 +25,16 @@ public class AllPharmaciesActivity extends AppCompatActivity {
         loadData();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.refreshPharmacies);
         pullToRefresh.setOnRefreshListener(() -> {
-            viewClear();
+            layout.removeAllViews();
             loadData();
             pullToRefresh.setRefreshing(false);
         });
     }
 
-    private void viewClear() {
-        layout.removeAllViews();
-    }
-
     private void loadData() {
         HashMap<String, String> pharmacies;
         try {
-            pharmacies = new PharmaciesUtil(findViewById(R.id.loadingPanel)).execute().get();
+            pharmacies = new PharmaciesUtil(this).execute().get();
             for (String item : pharmacies.keySet()) {
                 addCard(item, pharmacies.get(item));
             }

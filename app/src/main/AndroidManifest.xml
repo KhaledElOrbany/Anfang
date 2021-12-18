@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Anfang">
         <activity
             android:name=".AllPharmaciesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SinglePlugActivity"
             android:exported="false"
