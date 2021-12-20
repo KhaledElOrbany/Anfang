@@ -42,7 +42,7 @@ public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, Stri
                 String header = row.select("div.card-header").text();
                 String body = row.select("div.card-body").text();
                 try {
-                    phone = body.substring(body.lastIndexOf(":") + 1, body.indexOf("Ara"));
+                    phone = body.substring(body.lastIndexOf(":") + 1).replace("Ara", "");
                 } catch (Exception ex) {
                     phone = "";
                 }
