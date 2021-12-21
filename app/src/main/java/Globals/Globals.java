@@ -7,10 +7,10 @@ import androidx.annotation.NonNull;
 
 public class Globals {
     @NonNull
-    public static ProgressDialog ShowLoadingPanel(Context context) {
+    public static ProgressDialog ShowLoadingPanel(Context context, String title, String msg) {
         ProgressDialog progress = new ProgressDialog(context);
-        progress.setTitle("Loading");
-        progress.setMessage("Please wait while loading...");
+        progress.setTitle(title);
+        progress.setMessage(msg);
         progress.setCancelable(false);
         progress.show();
         return progress;

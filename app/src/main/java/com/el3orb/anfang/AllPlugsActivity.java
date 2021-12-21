@@ -30,11 +30,12 @@ public class AllPlugsActivity extends AppCompatActivity {
     }
 
     public void loadData() {
-        ProgressDialog progress = Globals.ShowLoadingPanel(this);
+        ProgressDialog progress =
+                Globals.ShowLoadingPanel(this, "Loading..", "Please wait while loading...");
         new PlugsUtil().getPlugs(plugs -> {
             for (DataSnapshot plug : plugs) {
-                boolean state = false;
                 String name = "";
+                boolean state = false;
                 for (DataSnapshot data : plug.getChildren()) {
                     if (Objects.equals(data.getKey(), "state")) {
                         state = !Objects.requireNonNull(data.getValue()).toString().equals("0");
@@ -51,8 +52,7 @@ public class AllPlugsActivity extends AppCompatActivity {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private void addCard(String id, String name, boolean state) {
-        @SuppressLint("InflateParams")
-        final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
+        @SuppressLint("InflateParams") final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
 
         view.setOnClickListener(v -> {
             Intent plugDetails = new Intent(AllPlugsActivity.this, SinglePlugActivity.class);
