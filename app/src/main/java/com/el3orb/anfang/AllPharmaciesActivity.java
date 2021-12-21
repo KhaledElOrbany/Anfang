@@ -34,7 +34,7 @@ public class AllPharmaciesActivity extends AppCompatActivity {
     private void loadData() {
         HashMap<String, String> pharmacies;
         try {
-            pharmacies = new PharmaciesUtil(this).execute().get();
+            pharmacies = new PharmaciesUtil().execute().get();
             for (String item : pharmacies.keySet()) {
                 addCard(item, pharmacies.get(item));
             }

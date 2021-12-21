@@ -1,7 +1,5 @@
 package Utilities;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import org.jsoup.Jsoup;
@@ -12,31 +10,15 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, String>> {
-    private final Context context;
     HashMap<String, String> pharmacies;
-    private ProgressDialog pd;
-
-    public PharmaciesUtil(Context context) {
-        this.context = context;
-        pharmacies = new HashMap<>();
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        pd = new ProgressDialog(context);
-        pd.setMessage("Refreshing.. Please Wait!");
-        pd.setIndeterminate(false);
-        pd.setCancelable(false);
-        pd.show();
-    }
 
     @Override
     protected HashMap<String, String> doInBackground(String... String) {
-        String phone;
+        pharmacies = new HashMap<>();
         final String url = "https://www.nobetcieczanebul.com/sakarya-nobetci-eczane";
 
         try {
+            String phone;
             Document doc = Jsoup.connect(url).ignoreContentType(true).get();
             for (Element row : doc.select("div.col")) {
                 String header = row.select("div.card-header").text();
@@ -53,10 +35,5 @@ public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, Stri
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(HashMap<String, String> result) {
-        pd.dismiss();
     }
 }
