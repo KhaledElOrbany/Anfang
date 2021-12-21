@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -48,29 +49,36 @@ public class SinglePlugActivity extends AppCompatActivity {
     }
 
     private void fillLineChart() {
-        mChart = (LineChart) findViewById(R.id.lineChart);
-
-//        mChart.setOnChartGestureListener(MainActivity.this);
-//        mChart.setOnChartValueSelectedListener(MainActivity.this);
+        mChart = findViewById(R.id.lineChart);
 
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
+        mChart.getXAxis().setTextColor(Color.WHITE);
+        mChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        mChart.getAxisLeft().setTextColor(Color.WHITE);
+        mChart.getAxisRight().setEnabled(false);
+
 
         ArrayList<Entry> yValues = new ArrayList<>();
-        yValues.add(new Entry(0, 60f));
+        yValues.add(new Entry(0, 00f));
         yValues.add(new Entry(1, 50f));
         yValues.add(new Entry(2, 70f));
         yValues.add(new Entry(3, 90f));
         yValues.add(new Entry(4, 60f));
         yValues.add(new Entry(5, 30f));
         yValues.add(new Entry(6, 80f));
+        yValues.add(new Entry(7, 60f));
 
-        LineDataSet set1 = new LineDataSet(yValues, "Amper");
-        set1.setFillAlpha(110);
-        set1.setColor(Color.RED);
+        LineDataSet set = new LineDataSet(yValues, "Ampere");
+        set.setFillAlpha(110);
+        set.setColor(Color.RED);
+        set.setCircleColor(Color.WHITE);
+        set.setValueTextColor(Color.BLUE);
+        set.setDrawValues(false);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+        dataSets.add(set);
 
         LineData data = new LineData(dataSets);
 
