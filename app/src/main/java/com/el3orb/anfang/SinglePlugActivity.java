@@ -30,8 +30,6 @@ public class SinglePlugActivity extends AppCompatActivity {
     DatabaseReference prayerRef = rootRef.getReference(), plug;
     String plugId, plugName;
 
-    private LineChart mChart;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class SinglePlugActivity extends AppCompatActivity {
     }
 
     private void fillLineChart() {
-        mChart = findViewById(R.id.lineChart);
+        LineChart mChart = findViewById(R.id.lineChart);
 
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(false);
@@ -59,6 +57,7 @@ public class SinglePlugActivity extends AppCompatActivity {
         mChart.getAxisLeft().setTextColor(Color.WHITE);
         mChart.getAxisRight().setEnabled(false);
 
+        mChart.getDescription().setTextColor(Color.WHITE);
 
         ArrayList<Entry> yValues = new ArrayList<>();
         yValues.add(new Entry(0, 00f));
@@ -80,9 +79,7 @@ public class SinglePlugActivity extends AppCompatActivity {
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
 
-        LineData data = new LineData(dataSets);
-
-        mChart.setData(data);
+        mChart.setData(new LineData(dataSets));
     }
 
     public void editPlugName() {
@@ -92,6 +89,7 @@ public class SinglePlugActivity extends AppCompatActivity {
 
         final EditText name = view.findViewById(R.id.nameEdit);
         name.setText(getTitle());
+        name.setHint(R.string.plugNewName);
 
         builder.setView(view);
         builder.setTitle("Edit name");

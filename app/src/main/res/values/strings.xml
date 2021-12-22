@@ -34,4 +34,5 @@
     <string name="txtEditPlugName">Edit Plug Name</string>
     <string name="plugsCard">plugsCard</string>
     <string name="pharmaciesCard">pharmaciesCard</string>
+    <string name="plugNewName">Insert name</string>
 </resources>
