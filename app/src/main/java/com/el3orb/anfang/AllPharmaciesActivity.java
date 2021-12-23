@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import java.util.concurrent.ExecutionException;
 import Utilities.PharmaciesUtil;
 
 public class AllPharmaciesActivity extends AppCompatActivity {
+    private ProgressBar spinner;
     LinearLayout layout;
 
     @Override
@@ -22,6 +24,7 @@ public class AllPharmaciesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_pharmacies);
         layout = findViewById(R.id.allPharmacyContainer);
+        spinner = findViewById(R.id.loadingPanel);
         loadData();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.refreshPharmacies);
         pullToRefresh.setOnRefreshListener(() -> {
@@ -34,7 +37,7 @@ public class AllPharmaciesActivity extends AppCompatActivity {
     private void loadData() {
         HashMap<String, String> pharmacies;
         try {
-            pharmacies = new PharmaciesUtil().execute().get();
+            pharmacies = new PharmaciesUtil(spinner).execute().get();
             for (String item : pharmacies.keySet()) {
                 addCard(item, pharmacies.get(item));
             }

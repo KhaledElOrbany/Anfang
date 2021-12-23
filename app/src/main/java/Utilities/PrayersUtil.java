@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PrayersUtil extends AsyncTask<String, Void, String[]> {
     private final ProgressBar spinner;
 
-    public PrayersUtil(ProgressBar spinner) {
+    public PrayersUtil(final ProgressBar spinner) {
         this.spinner = spinner;
     }
 

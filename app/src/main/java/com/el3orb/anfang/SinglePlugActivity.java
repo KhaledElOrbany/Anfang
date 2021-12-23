@@ -42,7 +42,7 @@ public class SinglePlugActivity extends AppCompatActivity {
         this.plugId = extras.getString("plugId");
         this.plugName = extras.getString("plugName");
         setTitle(plugName);
-        plug = prayerRef.child("/hm01/plugs/" + plugId + "/");
+        plug = prayerRef.child("/hm01/nodes/plugs/" + plugId + "/");
         fillLineChart();
     }
 

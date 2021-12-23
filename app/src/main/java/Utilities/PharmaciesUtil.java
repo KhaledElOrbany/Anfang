@@ -1,6 +1,8 @@
 package Utilities;
 
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,7 +12,17 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, String>> {
+    private final ProgressBar spinner;
     HashMap<String, String> pharmacies;
+
+    public PharmaciesUtil(final ProgressBar spinner) {
+        this.spinner = spinner;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        spinner.setVisibility(View.VISIBLE);
+    }
 
     @Override
     protected HashMap<String, String> doInBackground(String... String) {
@@ -35,5 +47,10 @@ public class PharmaciesUtil extends AsyncTask<String, Void, HashMap<String, Stri
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(HashMap<String, String> result) {
+        spinner.setVisibility(View.GONE);
     }
 }
