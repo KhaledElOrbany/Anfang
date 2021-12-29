@@ -1,9 +1,9 @@
 package com.el3orb.anfang;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -11,15 +11,20 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.util.Objects;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import Globals.Globals;
+import Globals.Parsing;
 import Utilities.PlugsUtil;
 
 public class AllPlugsActivity extends AppCompatActivity {
     LinearLayout layout;
+    String url = "http://192.168.1.50:5000/api/nodes/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,25 +34,23 @@ public class AllPlugsActivity extends AppCompatActivity {
         layout = findViewById(R.id.allPlugsContainer);
     }
 
-    public void loadData() {
-        ProgressDialog progress =
-                Globals.ShowLoadingPanel(this, "Loading..", "Please wait while loading...");
-        new PlugsUtil().getPlugs(plugs -> {
-            for (DataSnapshot plug : plugs) {
-                String name = "";
-                boolean state = false;
-                for (DataSnapshot data : plug.getChildren()) {
-                    if (Objects.equals(data.getKey(), "state")) {
-                        state = !Objects.requireNonNull(data.getValue()).toString().equals("0");
-                    }
-                    if (Objects.equals(data.getKey(), "name")) {
-                        name = Objects.requireNonNull(data.getValue()).toString();
-                    }
+    private void loadData() {
+        RequestQueue requestQueue = Volley.newRequestQueue(AllPlugsActivity.this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, response -> {
+            for (int i = 0; i < response.length(); i++) {
+                try {
+                    JSONObject jsonObj = response.getJSONObject(i);
+                    addCard(
+                            jsonObj.getString("nodeName"),
+                            jsonObj.getString("nodeName"),
+                            Parsing.toBool(jsonObj.getString("nodeState"))
+                    );
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-                addCard(plug.getKey(), name, state);
             }
-            progress.dismiss();
-        });
+        }, error -> Log.e("Error", String.valueOf(error)));
+        requestQueue.add(jsonArrayRequest);
     }
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
