@@ -14,10 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -25,15 +21,13 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 
+import Utilities.PlugsUtil;
+
 public class SinglePlugActivity extends AppCompatActivity {
-    String url;
     int plugId;
-    String plugName;
+    String url, plugName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +81,6 @@ public class SinglePlugActivity extends AppCompatActivity {
         mChart.setData(new LineData(dataSets));
     }
 
-    //TODO: change node name
     public void editPlugName() {
         Dialog editNameDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -100,18 +93,11 @@ public class SinglePlugActivity extends AppCompatActivity {
         builder.setView(view);
         builder.setTitle("Edit name");
         builder.setPositiveButton("Ok", (dialog, which) -> {
-            try {
-                final JSONArray jsonBody = new JSONArray(
-                        "[{\"op\":\"replace\", \"path\":\"NodeName\",\"value\":\"" + name.getText().toString() + "\"}]"
-                );
-                setTitle(name.getText().toString());
-                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.PATCH, url, jsonBody, response -> {
-                }, error -> Log.e("Error!!", String.valueOf(error)));
-                Volley.newRequestQueue(this).add(jsonArrayRequest);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }).setNegativeButton("Cancel", (dialog, which) -> { });
+            PlugsUtil plugsUtil = new PlugsUtil();
+            plugsUtil.setPlugName(SinglePlugActivity.this, plugId, name.getText().toString());
+            setTitle(name.getText().toString());
+        }).setNegativeButton("Cancel", (dialog, which) -> {
+        });
         editNameDialog = builder.create();
         editNameDialog.setCanceledOnTouchOutside(false);
         editNameDialog.show();

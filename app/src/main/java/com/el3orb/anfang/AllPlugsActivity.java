@@ -19,12 +19,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Globals.Parsing;
 import Utilities.PlugsUtil;
 
 public class AllPlugsActivity extends AppCompatActivity {
-    LinearLayout layout;
     final String url = "http://192.168.1.50:5000/api/nodes/";
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,25 +53,24 @@ public class AllPlugsActivity extends AppCompatActivity {
     }
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private void addCard(int id, String name, boolean state) {
+    private void addCard(int plugId, String plugName, boolean plugState) {
         @SuppressLint("InflateParams") final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
 
         view.setOnClickListener(v -> {
             Intent plugDetails = new Intent(AllPlugsActivity.this, SinglePlugActivity.class);
-            plugDetails.putExtra("plugId", id);
-            plugDetails.putExtra("plugName", name);
+            plugDetails.putExtra("plugId", plugId);
+            plugDetails.putExtra("plugName", plugName);
             startActivity(plugDetails);
         });
 
-        ((TextView) view.findViewById(R.id.plugName)).setText(name);
+        ((TextView) view.findViewById(R.id.plugName)).setText(plugName);
 
-        //TODO: toggle switch state
         Switch stateSwitch = view.findViewById(R.id.switchPlug);
         stateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PlugsUtil plugsUtil = new PlugsUtil();
-            plugsUtil.setPlugsState(id, isChecked);
+            plugsUtil.setPlugsState(AllPlugsActivity.this, plugId, isChecked);
         });
-        stateSwitch.setChecked(state);
+        stateSwitch.setChecked(plugState);
         layout.addView(view);
     }
 
