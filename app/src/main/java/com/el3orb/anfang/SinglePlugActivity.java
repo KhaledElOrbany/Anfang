@@ -14,21 +14,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
 public class SinglePlugActivity extends AppCompatActivity {
-    FirebaseDatabase rootRef = FirebaseDatabase.getInstance();
-    DatabaseReference prayerRef = rootRef.getReference(), plug;
-    String plugId, plugName;
+    String url;
+    int plugId;
+    String plugName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +44,10 @@ public class SinglePlugActivity extends AppCompatActivity {
             Log.e(SinglePlugActivity.this.getLocalClassName(), "intent extras is null");
             return;
         }
-        this.plugId = extras.getString("plugId");
+        this.plugId = extras.getInt("plugId");
         this.plugName = extras.getString("plugName");
         setTitle(plugName);
-        plug = prayerRef.child("/hm01/nodes/plugs/" + plugId + "/");
+        url = "http://192.168.1.50:5000/api/nodes/" + plugId;
         fillLineChart();
     }
 
@@ -82,6 +87,7 @@ public class SinglePlugActivity extends AppCompatActivity {
         mChart.setData(new LineData(dataSets));
     }
 
+    //TODO: change node name
     public void editPlugName() {
         Dialog editNameDialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -94,11 +100,18 @@ public class SinglePlugActivity extends AppCompatActivity {
         builder.setView(view);
         builder.setTitle("Edit name");
         builder.setPositiveButton("Ok", (dialog, which) -> {
-            plug.child("name").setValue(name.getText().toString());
-            setTitle(name.getText().toString());
-        }).setNegativeButton("Cancel", (dialog, which) -> {
-
-        });
+            try {
+                final JSONArray jsonBody = new JSONArray(
+                        "[{\"op\":\"replace\", \"path\":\"NodeName\",\"value\":\"" + name.getText().toString() + "\"}]"
+                );
+                setTitle(name.getText().toString());
+                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.PATCH, url, jsonBody, response -> {
+                }, error -> Log.e("Error!!", String.valueOf(error)));
+                Volley.newRequestQueue(this).add(jsonArrayRequest);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }).setNegativeButton("Cancel", (dialog, which) -> { });
         editNameDialog = builder.create();
         editNameDialog.setCanceledOnTouchOutside(false);
         editNameDialog.show();

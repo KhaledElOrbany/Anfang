@@ -24,7 +24,7 @@ import Utilities.PlugsUtil;
 
 public class AllPlugsActivity extends AppCompatActivity {
     LinearLayout layout;
-    String url = "http://192.168.1.50:5000/api/nodes/";
+    final String url = "http://192.168.1.50:5000/api/nodes/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +41,9 @@ public class AllPlugsActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObj = response.getJSONObject(i);
                     addCard(
+                            jsonObj.getInt("id"),
                             jsonObj.getString("nodeName"),
-                            jsonObj.getString("nodeName"),
-                            Parsing.toBool(jsonObj.getString("nodeState"))
+                            jsonObj.getBoolean("nodeState")
                     );
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -54,7 +54,7 @@ public class AllPlugsActivity extends AppCompatActivity {
     }
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private void addCard(String id, String name, boolean state) {
+    private void addCard(int id, String name, boolean state) {
         @SuppressLint("InflateParams") final View view = getLayoutInflater().inflate(R.layout.plug_card, null);
 
         view.setOnClickListener(v -> {
@@ -66,6 +66,7 @@ public class AllPlugsActivity extends AppCompatActivity {
 
         ((TextView) view.findViewById(R.id.plugName)).setText(name);
 
+        //TODO: toggle switch state
         Switch stateSwitch = view.findViewById(R.id.switchPlug);
         stateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             PlugsUtil plugsUtil = new PlugsUtil();

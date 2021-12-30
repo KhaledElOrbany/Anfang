@@ -1,7 +1,7 @@
 package Utilities;
 
 public class PlugsUtil {
-    public void setPlugsState(String plugId, boolean state) {
+    public void setPlugsState(int plugId, boolean state) {
 
     }
 }
