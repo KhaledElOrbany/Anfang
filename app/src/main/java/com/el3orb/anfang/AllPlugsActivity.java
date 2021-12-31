@@ -2,6 +2,7 @@ package com.el3orb.anfang;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,5 +35,8 @@ public class AllPlugsActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }, error -> Log.e("Error", String.valueOf(error)));
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public void addNewPlug(View view) {
     }
 }
