@@ -23,6 +23,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
 
+import Globals.Globals;
 import Utilities.PlugsUtil;
 
 public class SinglePlugActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class SinglePlugActivity extends AppCompatActivity {
         this.plugId = extras.getInt("plugId");
         this.plugName = extras.getString("plugName");
         setTitle(plugName);
-        url = "http://192.168.1.50:5000/api/nodes/" + plugId;
+        url = Globals.BaseUrl + plugId;
         fillLineChart();
     }
 

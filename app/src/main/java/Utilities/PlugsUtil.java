@@ -10,11 +10,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import Globals.Globals;
+
 public class PlugsUtil {
-    String url = "http://192.168.1.50:5000/api/nodes/";
+    String url = Globals.BaseUrl;
 
     public void setPlugName(Context context, int plugId, String name) {
-        url = "http://192.168.1.50:5000/api/nodes/" + plugId;
+        url += plugId;
 
         try {
             final JSONArray jsonBody = new JSONArray(
@@ -30,7 +32,7 @@ public class PlugsUtil {
     }
 
     public void setPlugsState(Context context, int plugId, boolean state) {
-        url = "http://192.168.1.50:5000/api/nodes/" + plugId;
+        url += plugId;
 
         try {
             final JSONArray jsonBody = new JSONArray(

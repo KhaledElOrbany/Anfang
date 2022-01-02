@@ -8,10 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
-
-import Utilities.DialogsUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,9 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.itmWifi:
-                DialogsUtil dialog = new DialogsUtil("Info",
-                        "This option will be provided soon..", "Ok");
-                dialog.show(getSupportFragmentManager(), "Info");
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Info")
+                        .setMessage("This option will be provided soon..")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, which) -> {
+                        });
+                alert.create().show();
                 return true;
             case R.id.itmAbout:
                 Intent aboutIntent = new Intent(this, AboutActivity.class);

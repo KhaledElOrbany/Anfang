@@ -1,9 +1,11 @@
 package Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.el3orb.anfang.R;
+import com.el3orb.anfang.SinglePlugActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,14 +42,21 @@ public class AllPlugsAdapter extends RecyclerView.Adapter<AllPlugsAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {
-            int id = nodesDetails.getJSONObject(position).getInt("id");
-            holder.nodeId.setText(String.valueOf(id));
-            holder.nodeName.setText(nodesDetails.getJSONObject(position).getString("nodeName"));
-            holder.nodeState.setChecked(nodesDetails.getJSONObject(position).getBoolean("nodeState"));
-            holder.nodeState.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int plugId = nodesDetails.getJSONObject(position).getInt("id");
+            String plugName = nodesDetails.getJSONObject(position).getString("nodeName");
+            holder.nodeId.setText(String.valueOf(plugId));
+            holder.nodeName.setText(plugName);
+            holder.nodeStateSwitch.setChecked(nodesDetails.getJSONObject(position).getBoolean("nodeState"));
+            holder.nodeStateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 PlugsUtil plugsUtil = new PlugsUtil();
-                plugsUtil.setPlugsState(this.context, id, isChecked);
+                plugsUtil.setPlugsState(this.context, plugId, isChecked);
 
+            });
+            holder.nodeCardLayout.setOnClickListener(v -> {
+                Intent plugDetails = new Intent(this.context, SinglePlugActivity.class);
+                plugDetails.putExtra("plugId", plugId);
+                plugDetails.putExtra("plugName", plugName);
+                context.startActivity(plugDetails);
             });
         } catch (JSONException e) {
             e.printStackTrace();
@@ -60,13 +70,15 @@ public class AllPlugsAdapter extends RecyclerView.Adapter<AllPlugsAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nodeName, nodeId;
-        Switch nodeState;
+        Switch nodeStateSwitch;
+        RelativeLayout nodeCardLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            nodeId = itemView.findViewById(R.id.plugId);
-            nodeName = itemView.findViewById(R.id.plugName);
-            nodeState = itemView.findViewById(R.id.switchPlug);
+            nodeId = itemView.findViewById(R.id.nodeId);
+            nodeName = itemView.findViewById(R.id.nodeName);
+            nodeStateSwitch = itemView.findViewById(R.id.nodeStateSwitch);
+            nodeCardLayout = itemView.findViewById(R.id.nodeCardLayout);
         }
     }
 }
