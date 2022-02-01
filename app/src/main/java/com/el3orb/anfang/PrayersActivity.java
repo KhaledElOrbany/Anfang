@@ -1,11 +1,14 @@
 package com.el3orb.anfang;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -41,15 +44,28 @@ public class PrayersActivity extends AppCompatActivity {
         String[] prayersTimes = {};
         try {
             prayersTimes = new PrayersUtil(findViewById(R.id.loadingPanel)).execute().get();
+
+            if (prayersTimes != null) {
+                ((TextView) findViewById(R.id.txtImsakTime)).setText(prayersTimes[0].trim());
+                ((TextView) findViewById(R.id.txtSunriseTime)).setText(prayersTimes[1].trim());
+                ((TextView) findViewById(R.id.txtDhuhrTime)).setText(prayersTimes[2].trim());
+                ((TextView) findViewById(R.id.txtAsrTime)).setText(prayersTimes[3].trim());
+                ((TextView) findViewById(R.id.txtMaghribTime)).setText(prayersTimes[4].trim());
+                ((TextView) findViewById(R.id.txtIshaTime)).setText(prayersTimes[5].trim());
+            } else {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                alert.setTitle("Info")
+                        .setMessage("The Server Is Down..")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            Intent intent = new Intent(PrayersActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        });
+                alert.create().show();
+            }
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            Log.e("Error", "Error in scraping data!", e);
         }
-        ((TextView) findViewById(R.id.txtImsakTime)).setText(prayersTimes[0].trim());
-        ((TextView) findViewById(R.id.txtSunriseTime)).setText(prayersTimes[1].trim());
-        ((TextView) findViewById(R.id.txtDhuhrTime)).setText(prayersTimes[2].trim());
-        ((TextView) findViewById(R.id.txtAsrTime)).setText(prayersTimes[3].trim());
-        ((TextView) findViewById(R.id.txtMaghribTime)).setText(prayersTimes[4].trim());
-        ((TextView) findViewById(R.id.txtIshaTime)).setText(prayersTimes[5].trim());
     }
 
     @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
