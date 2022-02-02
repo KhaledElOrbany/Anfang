@@ -42,6 +42,7 @@ public class AllPlugsAdapter extends RecyclerView.Adapter<AllPlugsAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {
+            int nodeType = nodesDetails.getJSONObject(position).getInt("type");
             int plugId = nodesDetails.getJSONObject(position).getInt("id");
             String plugName = nodesDetails.getJSONObject(position).getString("nodeName");
             holder.nodeId.setText(String.valueOf(plugId));
@@ -49,11 +50,12 @@ public class AllPlugsAdapter extends RecyclerView.Adapter<AllPlugsAdapter.MyView
             holder.nodeStateSwitch.setChecked(nodesDetails.getJSONObject(position).getBoolean("nodeState"));
             holder.nodeStateSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 PlugsUtil plugsUtil = new PlugsUtil();
-                plugsUtil.setPlugsState(this.context, plugId, isChecked);
+                plugsUtil.setPlugsState(this.context, nodeType, plugId, isChecked);
 
             });
             holder.nodeCardLayout.setOnClickListener(v -> {
                 Intent plugDetails = new Intent(this.context, SinglePlugActivity.class);
+                plugDetails.putExtra("nodeType", nodeType);
                 plugDetails.putExtra("plugId", plugId);
                 plugDetails.putExtra("plugName", plugName);
                 context.startActivity(plugDetails);

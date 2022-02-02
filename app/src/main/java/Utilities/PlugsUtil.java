@@ -15,8 +15,8 @@ import Globals.Globals;
 public class PlugsUtil {
     String url = Globals.BaseUrl;
 
-    public void setPlugName(Context context, int plugId, String name) {
-        url += plugId;
+    public void setPlugName(Context context, int type, int plugId, String name) {
+        url += type + "/" + plugId;
 
         try {
             final JSONArray jsonBody = new JSONArray(
@@ -24,15 +24,15 @@ public class PlugsUtil {
             );
             Volley.newRequestQueue(context).add(new JsonArrayRequest(Request.Method.PATCH, url,
                             jsonBody, response -> {
-                    }, error -> Log.e("Error!!", String.valueOf(error)))
+                    }, error -> Log.e("Name Error!!", String.valueOf(error)))
             );
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void setPlugsState(Context context, int plugId, boolean state) {
-        url += plugId;
+    public void setPlugsState(Context context, int type, int plugId, boolean state) {
+        url += type + "/" + plugId;
 
         try {
             final JSONArray jsonBody = new JSONArray(
@@ -40,7 +40,7 @@ public class PlugsUtil {
             );
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.PATCH, url,
                     jsonBody, response -> {
-            }, error -> Log.e("Error!!", String.valueOf(error)));
+            }, error -> Log.e("State Error!!", String.valueOf(error)));
             Volley.newRequestQueue(context).add(jsonArrayRequest);
         } catch (JSONException e) {
             e.printStackTrace();

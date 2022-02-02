@@ -27,7 +27,7 @@ import Globals.Globals;
 import Utilities.PlugsUtil;
 
 public class SinglePlugActivity extends AppCompatActivity {
-    int plugId;
+    int nodeType, plugId;
     String url, plugName;
 
     @Override
@@ -39,6 +39,7 @@ public class SinglePlugActivity extends AppCompatActivity {
             Log.e(SinglePlugActivity.this.getLocalClassName(), "intent extras is null");
             return;
         }
+        this.nodeType = extras.getInt("nodeType");
         this.plugId = extras.getInt("plugId");
         this.plugName = extras.getString("plugName");
         setTitle(plugName);
@@ -95,7 +96,7 @@ public class SinglePlugActivity extends AppCompatActivity {
         builder.setTitle("Edit name");
         builder.setPositiveButton("Ok", (dialog, which) -> {
             PlugsUtil plugsUtil = new PlugsUtil();
-            plugsUtil.setPlugName(SinglePlugActivity.this, plugId, name.getText().toString());
+            plugsUtil.setPlugName(SinglePlugActivity.this, nodeType, plugId, name.getText().toString());
             setTitle(name.getText().toString());
         }).setNegativeButton("Cancel", (dialog, which) -> {
         });
